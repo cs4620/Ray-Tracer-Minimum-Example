@@ -7,10 +7,7 @@ class Camera {
     this.angle = angle
   }
 
-  getOrigin(x, y) {
-    return this.origin;
-  }
-  
+  //Get the direction from the origin of the camera to the given pixel
   getDirection(x, y) {
 
     //Take a cross product to determine the right direction

@@ -38,30 +38,30 @@ class Triangle{
    * Get the vector from one to two
    */
   get oneTwo(){
-    return this.one.position.minus(this.two.position).normalize();
+    return this.one.minus(this.two).normalize();
   }
 
   get twoThree(){
-    return this.two.position.minus(this.three.position).normalize();
+    return this.two.minus(this.three).normalize();
   }
 
   get threeOne(){
-    return this.three.position.minus(this.one.position).normalize();
+    return this.three.minus(this.one).normalize();
   }
   
   /**
    * Get the vector from three to two
    */
   get threeTwo(){
-    return this.three.position.minus(this.two.position).normalize();
+    return this.three.minus(this.two).normalize();
   }
 
   get twoOne(){
-    return this.two.position.minus(this.one.position).normalize();
+    return this.two.minus(this.one).normalize();
   }
 
   get oneThree(){
-    return this.one.position.minus(this.three.position).normalize();
+    return this.one.minus(this.three).normalize();
   }
   
   /**
@@ -81,7 +81,7 @@ class Triangle{
     }
     
     //Calculate the D from the plane that contains this triangle
-    let D = -(ABC.dot(this.one.position));
+    let D = -(ABC.dot(this.one));
 
     //Calculate the time to collision
     let timeToCollision = (-D-origin.dot(ABC))/(direction.dot(ABC))
@@ -92,9 +92,9 @@ class Triangle{
     let collisionLocation = origin.add(direction.scale(timeToCollision));
 
     //Now check if this location is in the triangle
-    let oneCollision = collisionLocation.minus(this.one.position).normalize();
-    let twoCollision = collisionLocation.minus(this.two.position).normalize();
-    let threeCollision = collisionLocation.minus(this.three.position).normalize();
+    let oneCollision = collisionLocation.minus(this.one).normalize();
+    let twoCollision = collisionLocation.minus(this.two).normalize();
+    let threeCollision = collisionLocation.minus(this.three).normalize();
 
     let a = this.oneTwo.cross(oneCollision);
     let b = this.twoThree.cross(twoCollision);
@@ -109,6 +109,6 @@ class Triangle{
     if(k < 0) return;
     
     //Return all the details about the collision
-    return new Collision(timeToCollision, collisionLocation, ABC);
+    return new Collision(timeToCollision, collisionLocation);
   }
 }
